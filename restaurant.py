@@ -1,0 +1,154 @@
+import pandas as pd
+import numpy as np
+import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
+import jieba
+from wordcloud import WordCloud 
+
+plt.style.use('seaborn')
+
+df=pd.read_excel('restaurant.xlsx')
+df=df.iloc[:,1:]
+df_cities= pd.DataFrame(df.groupby('city').name.count().sort_values(ascending = False))
+df_cities.rename(columns={'name':'num'},inplace=True)
+
+
+st.title('Eating out in Europe')
+st.header('Details of Dataset')
+st.write(df.head(5))
+st.header('Number of Restaurants')
+num_filter = st.slider('Number of Restaurants in each city:',0,17500,2000)  
+
+
+# filter by num
+df_cities = df_cities[df_cities.num >= num_filter]
+
+st.bar_chart(df_cities)
+
+
+st.header('Reviews_number of Restaurants')
+df_reviews = pd.DataFrame(df.groupby('city').reviews_number.sum().sort_values(ascending=False))
+reviews_filter = st.slider('Average Reviews_number in each city:',40000,2000000,60000) 
+
+df_reviews = df_reviews[df_reviews.reviews_number>= reviews_filter]
+
+st.bar_chart(df_reviews)
+
+
+
+st.header('Price_range of Restaurants')
+st.write('Use something more intuitive ro replace the notation used in the dataset')
+
+df['price_range'] = df['price_range'].fillna('NA')
+price_ranges = {'$': 'Cheaper', '$$ - $$$': 'Medium', '$$$$': 'Higher', 'NA': 'NotAvailable'}
+df['price_range'] = df.price_range.map(price_ranges)
+
+st.write(price_ranges)
+# st.sidebar.write('setect city you interested ')
+
+st.subheader('Price_range of all cities')
+
+fig1, ax1 = plt.subplots(figsize=(8, 6))
+df_all=pd.DataFrame(df.groupby(['city', 'price_range']).name.count()).reset_index()
+
+sns.barplot(data=df_all,x='city', y ='name', hue='price_range', hue_order = ['Cheaper', 'Medium', 'Higher'], palette = ['#4ECDC4', '#FFE66D', '#FF6B6B'])
+plt.ylabel('Reviews per Price Range')
+plt.xticks(rotation=75)
+st.pyplot(fig1)
+
+st.subheader('Price_range of selected city')
+
+city_filter = st.sidebar.selectbox(
+     'City Selector Of Princ_range',
+     df.city.unique(),  # options
+     1)  # defaults
+
+
+# filter by capital
+df_price = df[df['city']==city_filter]
+df_price = pd.DataFrame(df_price.groupby(['city', 'price_range']).name.count()).reset_index()
+
+st.write('Peice_range of',city_filter)
+
+fig2, ax2 = plt.subplots(figsize=(8, 6))
+sns.barplot(data=df_price,x='city', y ='name', hue='price_range', hue_order = ['Cheaper', 'Medium', 'Higher'], palette = ['#4ECDC4', '#FFE66D', '#FF6B6B'])
+plt.ylabel('Reviews per Price Range')
+st.pyplot(fig2)
+
+st.header('Cuisine_style Analyse')
+st.subheader('Cuisine_style of Europe')
+
+cuisine=""
+for i in df.cuisine_style:
+    cuisine+=str(i)
+cuisine=cuisine.replace('[','')
+cuisine=cuisine.replace(']','')
+cuisine=jieba.cut(cuisine)
+cuisine=''.join(cuisine)
+cuisine=cuisine.replace(',','')
+
+wc=WordCloud(
+    background_color="white", 
+    width=400, 
+    height=300,
+    max_words=200, 
+    max_font_size=80, 
+    contour_width=3, 
+    contour_color='steelblue',
+     mode='RGBA' 
+    
+)
+
+fig3=plt.figure(figsize=(8,8))
+wc.generate(cuisine)
+plt.imshow(wc) 
+plt.axis("off")
+st.pyplot(fig3)
+
+
+
+cuisine_filter = st.sidebar.selectbox(
+     'City Selector Of Cuisine',
+     df.city.unique(),  # options
+     1) 
+
+st.subheader('Cuisine_style of Selected City:')
+st.write('Cuisine_style of',cuisine_filter)
+df_cuisine = df[df['city']==cuisine_filter]
+
+cuisine_=""
+for i in df_cuisine.cuisine_style:
+    cuisine_+=str(i)
+cuisine_=cuisine_.replace('[','')
+cuisine_=cuisine_.replace(']','')
+cuisine_=jieba.cut(cuisine_)
+cuisine_=''.join(cuisine)
+cuisine_=cuisine_.replace(',','')
+
+wc=WordCloud(
+    background_color="white", 
+    width=400, 
+    height=300,
+    max_words=200, 
+    max_font_size=80, 
+    contour_width=3, 
+    contour_color='steelblue',
+     mode='RGBA' 
+    
+)
+
+fig4=plt.figure(figsize=(8,8))
+wc.generate(cuisine_)
+plt.imshow(wc) 
+plt.axis("off")
+st.pyplot(fig4)
+
+
+
+
+
+
+
+
+
