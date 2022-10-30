@@ -8,11 +8,10 @@ from wordcloud import WordCloud
 
 plt.style.use('seaborn')
 
-df=pd.read_excel('restaurant.xlsx')
+df=pd.read_csv('restaurant.csv')
 df=df.iloc[:,1:]
 df_cities= pd.DataFrame(df.groupby('city').name.count().sort_values(ascending = False))
 df_cities.rename(columns={'name':'num'},inplace=True)
-
 
 st.title('Eating out in Europe')
 st.header('Details of Dataset')
@@ -34,7 +33,6 @@ reviews_filter = st.slider('Average Reviews_number in each city:',40000,2000000,
 df_reviews = df_reviews[df_reviews.reviews_number>= reviews_filter]
 
 st.bar_chart(df_reviews)
-
 
 
 st.header('Price_range of Restaurants')
