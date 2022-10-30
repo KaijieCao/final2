@@ -141,12 +141,3 @@ wc.generate(cuisine_)
 plt.imshow(wc) 
 plt.axis("off")
 st.pyplot(fig4)
-
-
-
-
-
-
-
-
-
