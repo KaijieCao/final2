@@ -56,7 +56,7 @@ st.bar_chart(df_reviews)
 
 
 st.header('Q 2: We notice that the review number gets a little bit different from restaurant number.')
-st.write('We can see that the numbers of review in Rome is higher than Pairs. But Rome\'s restaurant number is much lower than that. It\'s quite interesting. We can guess if the Romans have a more discerning palate. Or French are more unwilling to make comments. But  ')
+st.write('We can see that the numbers of review in Rome is higher than Pairs. But Rome\'s restaurant number is much lower than that. It\'s quite interesting. We can guess if the Romans have a more discerning palate. Or French are more unwilling to make comments. But we all konw that French food is a little expensive. Will the cost of cusine be a obstacle for reviews? Taht may be a reason.')
 
 
 
