@@ -15,7 +15,7 @@ df_cities= pd.DataFrame(df.groupby('city').name.count().sort_values(ascending = 
 df_cities.rename(columns={'name':'num'},inplace=True)
 
 st.title('Factors affecting restaurants in Europe')
-st.header('Details of Dataset(take five for example)')
+st.header('Details of Dataset (Take five for example)')
 st.write('have reordered according to the city')
 st.write(df.head())
 st.header('Number of Restaurants')
