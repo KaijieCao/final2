@@ -30,7 +30,7 @@ st.pyplot(fig0)
 
 fig5,ax5=plt.subplots()
 ax5.set_title('aa')
-df_cities.plot(ax5 = ax5)
+df_cities.plot()
 
 
 
