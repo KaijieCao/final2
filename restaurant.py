@@ -37,7 +37,7 @@ st.bar_chart(df_cities)
 
 st.header('Reviews number of Restaurants')
 df_reviews = pd.DataFrame(df.groupby('city').reviews_number.sum().sort_values(ascending=False))
-reviews_filter = st.slider('Average Reviews_number in each city:',40000,2000000,60000) 
+reviews_filter = st.slider('Average Reviews number in each city:',40000,2000000,60000) 
 
 df_reviews = df_reviews[df_reviews.reviews_number>= reviews_filter]
 
