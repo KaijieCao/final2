@@ -22,7 +22,7 @@ st.header('Number of Restaurants')
 
 fig0, ax0 = plt.subplots(figsize = (20,20))
 ax0.set_title('Pie chart for restaurant numbers')
-ax0 = plt.pie(df_cities['city'].value_counts(),labels=df_cities['city'].value_counts,autopct='%3.1f%%')
+ax0 = plt.pie(df_cities['name'].value_counts(),labels=df_cities['name'].value_counts,autopct='%3.1f%%')
 st.pyplot(fig0)
 
 
