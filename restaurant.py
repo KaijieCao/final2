@@ -29,14 +29,14 @@ ax0 = plt.pie(df['city'].value_counts(),labels = df_cities.index,autopct='%3.1f%
 st.pyplot(fig0)
 
 
-fig5,ax5 = plt.subplots(figsize = (20,20))
-a = df.groupby('city')
-a = a['acc']
-ax5.set_title('line chart for restaurant numbers')
-ax5.set_xlabel('city')
-ax5.set_ylabel('number')
-a.plot(marker='s',color='red',linestyle='dashed')
-st.pyplot(fig5)
+# fig5,ax5 = plt.subplots(figsize = (20,20))
+# a = df.groupby('city')
+# a = a['acc']
+# ax5.set_title('line chart for restaurant numbers')
+# ax5.set_xlabel('city')
+# ax5.set_ylabel('number')
+# a.plot(marker='s',color='red',linestyle='dashed')
+# st.pyplot(fig5)
 
 
 num_filter = st.slider('Number of Restaurants in each city:',0,17500,2000)  
