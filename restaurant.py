@@ -27,10 +27,10 @@ ax0.set_title('Pie chart for restaurant numbers')
 ax0 = plt.pie(df['city'].value_counts(),labels = df_cities.index,autopct='%3.1f%%')
 st.pyplot(fig0)
 
+# line chart
+fig5, ax5 = plt.subplots()
+df_cities.num.plot(ax5=ax5)
 
-fig5,ax5=plt.subplots()
-ax5.set_title('aa')
-df_cities.plot()
 
 
 
