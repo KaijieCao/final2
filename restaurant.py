@@ -29,7 +29,7 @@ st.pyplot(fig0)
 
 # line chart
 fig5, ax5 = plt.subplots()
-df_cities.name.plot(ax5=ax5)
+df_cities.plot(ax5=ax5)
 
 
 
