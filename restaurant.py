@@ -15,6 +15,7 @@ df_cities.rename(columns={'name':'num'},inplace=True)
 
 st.title('Eating out in Europe')
 st.header('Details of Dataset')
+st.write('have reordered according to the city')
 st.write(df.head(5))
 st.header('Number of Restaurants')
 num_filter = st.slider('Number of Restaurants in each city:',0,17500,2000)  
