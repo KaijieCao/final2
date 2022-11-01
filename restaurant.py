@@ -1,3 +1,4 @@
+from unittest import result
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -13,11 +14,18 @@ df=df.iloc[:,1:]
 df_cities= pd.DataFrame(df.groupby('city').name.count().sort_values(ascending = False))
 df_cities.rename(columns={'name':'num'},inplace=True)
 
-st.title('Eating out in Europe')
+st.title('Factors affecting restaurants in Europe')
 st.header('Details of Dataset')
 st.write('have reordered according to the city')
 st.write(df.head(5))
 st.header('Number of Restaurants')
+
+fig0, ax0 = plt.subplots(figsize = (20,20))
+ax0.set_title('Pie chart for restaurant numbers')
+ax0 = plt.pie(df['city'].value_counts(),labels=df['city'].value_counts.index,autopct='%3.1f%%')
+st.pyplot(fig0)
+
+
 num_filter = st.slider('Number of Restaurants in each city:',0,17500,2000)  
 
 
