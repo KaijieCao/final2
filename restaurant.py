@@ -37,13 +37,27 @@ df_cities = df_cities[df_cities.num >= num_filter]
 st.bar_chart(df_cities)
 
 
+st.header('Q 1: We want to know which cities have many restaurants and the reasons behind this phenomenon.')
+st.write('We can see that London and Paris have over 10,000 restaurants. Both of the city are prosperity and energetic. The service sector can develop very well over here. That is the same thing for restaurant business. ')
+
+
+
+
+
+
+
 st.header('Reviews number of Restaurants')
 df_reviews = pd.DataFrame(df.groupby('city').reviews_number.sum().sort_values(ascending=False))
-reviews_filter = st.slider('Average Reviews number in each city:',40000,2000000,60000) 
+reviews_filter = st.slider('Average Reviews number in each city:',10000,2000000,60000) 
 
 df_reviews = df_reviews[df_reviews.reviews_number>= reviews_filter]
 
 st.bar_chart(df_reviews)
+
+
+st.header('Q 2: We notice that the review number gets a little bit different from restaurant number.')
+st.write('We can see that the numbers of review in Rome is higher than Pairs. But Rome\'s restaurant number is much lower than that. It\'s quite interesting. We can guess if the Romans have a more discerning palate. Or French are more unwilling to make comments. But  ')
+
 
 
 st.header('Price range of Restaurants')
@@ -105,7 +119,7 @@ wc=WordCloud(
     max_font_size=80, 
     contour_width=3, 
     contour_color='steelblue',
-     mode='RGBA' 
+    mode='RGBA' 
     
 )
 
