@@ -17,9 +17,11 @@ df_cities.rename(columns={'name':'num'},inplace=True)
 st.title('Factors affecting restaurants in Europe')
 st.header('Details of Dataset (Take five for example)')
 st.write('Have reordered according to the city')
+# sample
 st.write(df.head())
 st.header('Number of Restaurants')
 
+# pie chart
 fig0, ax0 = plt.subplots(figsize = (20,20))
 ax0.set_title('Pie chart for restaurant numbers')
 ax0 = plt.pie(df['city'].value_counts(),labels = df_cities.index,autopct='%3.1f%%')
