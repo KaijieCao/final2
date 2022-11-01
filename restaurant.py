@@ -35,7 +35,7 @@ df_cities = df_cities[df_cities.num >= num_filter]
 st.bar_chart(df_cities)
 
 
-st.header('Reviews_number of Restaurants')
+st.header('Reviews number of Restaurants')
 df_reviews = pd.DataFrame(df.groupby('city').reviews_number.sum().sort_values(ascending=False))
 reviews_filter = st.slider('Average Reviews_number in each city:',40000,2000000,60000) 
 
@@ -44,7 +44,7 @@ df_reviews = df_reviews[df_reviews.reviews_number>= reviews_filter]
 st.bar_chart(df_reviews)
 
 
-st.header('Price_range of Restaurants')
+st.header('Price range of Restaurants')
 st.write('Use something more intuitive ro replace the notation used in the dataset')
 
 df['price_range'] = df['price_range'].fillna('NA')
@@ -54,7 +54,7 @@ df['price_range'] = df.price_range.map(price_ranges)
 st.write(price_ranges)
 # st.sidebar.write('setect city you interested ')
 
-st.subheader('Price_range of all cities')
+st.subheader('Price range of all cities')
 
 fig1, ax1 = plt.subplots(figsize=(8, 6))
 df_all=pd.DataFrame(df.groupby(['city', 'price_range']).name.count()).reset_index()
@@ -64,7 +64,7 @@ plt.ylabel('Reviews per Price Range')
 plt.xticks(rotation=75)
 st.pyplot(fig1)
 
-st.subheader('Price_range of selected city')
+st.subheader('Price range of selected city')
 
 city_filter = st.sidebar.selectbox(
      'City Selector Of Princ_range',
@@ -76,15 +76,15 @@ city_filter = st.sidebar.selectbox(
 df_price = df[df['city']==city_filter]
 df_price = pd.DataFrame(df_price.groupby(['city', 'price_range']).name.count()).reset_index()
 
-st.write('Peice_range of',city_filter)
+st.write('Peice range of',city_filter)
 
 fig2, ax2 = plt.subplots(figsize=(8, 6))
 sns.barplot(data=df_price,x='city', y ='name', hue='price_range', hue_order = ['Cheaper', 'Medium', 'Higher'], palette = ['#4ECDC4', '#FFE66D', '#FF6B6B'])
 plt.ylabel('Reviews per Price Range')
 st.pyplot(fig2)
 
-st.header('Cuisine_style Analyse')
-st.subheader('Cuisine_style of Europe')
+st.header('Cuisine style Analyse')
+st.subheader('Cuisine style of Europe')
 
 cuisine=""
 for i in df.cuisine_style:
@@ -120,8 +120,8 @@ cuisine_filter = st.sidebar.selectbox(
      df.city.unique(),  # options
      1) 
 
-st.subheader('Cuisine_style of Selected City:')
-st.write('Cuisine_style of',cuisine_filter)
+st.subheader('Cuisine style of Selected City:')
+st.write('Cuisine style of',cuisine_filter)
 df_cuisine = df[df['city']==cuisine_filter]
 
 cuisine_=""
