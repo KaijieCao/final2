@@ -28,6 +28,15 @@ ax0 = plt.pie(df['city'].value_counts(),labels = df_cities.index,autopct='%3.1f%
 st.pyplot(fig0)
 
 
+fig5,ax5=plt.subplots()
+ax5.set_title('aa')
+df_cities.plot(ax5 = ax5)
+
+
+
+
+
+
 num_filter = st.slider('Number of Restaurants in each city:',0,17500,2000)  
 
 
